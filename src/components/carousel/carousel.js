@@ -7,9 +7,7 @@ import { useSelector } from "react-redux";
 
 const Carousel = () => {
   const cityDetails = (state) => state.weather.cityDetails;
-  let topFiveItems = useSelector(
-    (state) => state.weather.cityDetails
-  );
+  let topFiveItems = useSelector((state) => state.weather.cityDetails);
   let carousel = useRef();
   let [slideNum, setSlideNum] = useState(0);
   let [slide, setSlide] = useState(true);
@@ -44,7 +42,10 @@ const Carousel = () => {
 
   useEffect(() => {
     let interval;
-    if (!slide) {
+    if (interval) {
+      clearInterval(interval);
+    }
+    if (slide) {
       interval = setInterval(nextSlide, 5000);
     }
     return () => {
@@ -55,7 +56,7 @@ const Carousel = () => {
   return (
     <React.Fragment>
       <div
-        className="carousel"
+        className="carousel mb-5"
         onMouseOver={() => setSlide(false)}
         onMouseLeave={() => setSlide(true)}
       >
@@ -83,14 +84,10 @@ const Carousel = () => {
         <div className="dots">
           {topFiveItems.map((item, index) => (
             <div
-              className={`dot btn btn-outline-primary ${
-                index === slideNum ? "dot-focused" : ""
-              }`}
+              className={`dot ${index === slideNum ? "dot-focused" : ""}`}
               key={index}
               onClick={() => movetoNthSlide(index)}
-            >
-              {index + 1}
-            </div>
+            ></div>
           ))}
         </div>
       </div>

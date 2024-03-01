@@ -40,21 +40,19 @@ export const fetchCityStatus = (cityName) => {
           weatherCondtion: item.weather[0].main,
           windSpeed: item.wind.speed,
           temperature: parseInt(item.main.temp - 273.15),
-          feelsLikr: item.main.feels_like,
+          feelsLike: item.main.feels_like,
           humidity: item.main.humidity,
           pressure: item.main.pressure,
-          minTemperature: item.main.temp_min,
-          maxTemperature: item.main.temp_max,
+          minTemperature: parseInt(item.main.temp_min - 273.15),
+          maxTemperature: parseInt(item.main.temp_max - 273.15),
         };
       });
 
-      console.log(cityDetails)
-
-      dispatch(weatherActions.setCityDetails({ data: cityDetails}));
+      dispatch(weatherActions.setCityDetails({ data: cityDetails }));
     } catch {
       console.log("error in fetching weather info..");
-      dispatch(weatherActions.setCityDetails({ data: []}));
-      dispatch(weatherActions.setShowTopFive({ data: false}));
+      dispatch(weatherActions.setCityDetails({ data: [] }));
+      dispatch(weatherActions.setShowTopFive({ data: false }));
     } finally {
       dispatch(weatherActions.setIsLoading({ data: false }));
     }
