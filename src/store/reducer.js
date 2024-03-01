@@ -5,7 +5,7 @@ const initialState = {
   cityName: "",
   cityDetails: [],
   currentItem: {},
-  showTopFive: true,
+  showTopFive: false,
   topFive: [],
 };
 
