@@ -2,11 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import "./carousel.css";
 import Card from "../card/card";
 import Arrow from "../../Images/right-arrow.svg";
-import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 
 const Carousel = () => {
-  const cityDetails = (state) => state.weather.cityDetails;
   let topFiveItems = useSelector((state) => state.weather.cityDetails);
   let carousel = useRef();
   let [slideNum, setSlideNum] = useState(0);
