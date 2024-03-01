@@ -22,12 +22,12 @@ export const fetchCityStatus = (cityName) => {
     try {
       // get latitude and longitude
       let latLong = await axios.get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=95f0471168a0178722e26465e8523354`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=95f0471168a0178722e26465e8523354`
       );
 
       // get city details
       let res = await axios.get(
-        `http://api.openweathermap.org/data/2.5/forecast?lat=${latLong.data[0].lat}&lon=${latLong.data[0].lon}&appid=${appid}`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${latLong.data[0].lat}&lon=${latLong.data[0].lon}&appid=${appid}`
       );
 
       // filter data
