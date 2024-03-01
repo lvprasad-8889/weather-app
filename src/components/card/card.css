@@ -1,0 +1,70 @@
+.spacing-header {
+    padding: 20px 20px 12px !important;
+}
+
+.spacing-body {
+    padding: 20px;
+}
+
+.display-temp {
+    display: flex;
+    gap: 2px;
+}
+
+
+.units {
+    display: flex;
+    flex-direction: column;
+}
+
+.temp {
+ font-weight: bold;
+ font-size: 45px;
+ margin-top: -20px;
+}
+
+.symbol {
+    border-radius: 50%;
+    width: 5px;
+    height: 50x;
+    padding: 2px;
+    border: solid;
+}
+
+.sub {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.17);
+}
+.line {
+    height: 1px;
+    border: solid;
+    color: rgba(0, 0, 0, 0.17);
+    animation: hrAnimation 0.5s ease-in;
+}
+
+@keyframes hrAnimation {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.spacing-body > :first-child {
+    gap: 10px;
+}
+
+.dropdown-menu {
+    height: 138px;
+    overflow-y: scroll;
+}
+.dropdown-item, .dropdown-toggle {
+    cursor: pointer;
+}
+
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
