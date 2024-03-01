@@ -60,7 +60,7 @@ const Carousel = () => {
       >
         <div className="carousel-body scroll" ref={carousel}>
           {topFiveItems.map((item, index) => (
-            <Card currentItem={item} alt="Loading..." key={index} />
+            <Card currentItem={item} key={index} />
           ))}
         </div>
         {slideNum !== 0 && (
