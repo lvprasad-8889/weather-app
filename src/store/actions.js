@@ -15,10 +15,41 @@ const formatAMPM = (date) => {
   return strTime;
 };
 
+const cityFetched = (cityName) => {
+  let prevCityDetails = JSON.parse(localStorage.getItem("city-details"));
+  return prevCityDetails
+    ? prevCityDetails.findIndex((item) => item.cityName === cityName) !== -1
+    : false;
+};
+
+const setCity = (cityDetails) => {
+  let prevCityDetails = JSON.parse(localStorage.getItem("city-details"));
+  if (!prevCityDetails) {
+    localStorage.setItem("city-details", JSON.stringify([cityDetails]));
+  } else {
+    localStorage.setItem(
+      "city-details",
+      JSON.stringify([...prevCityDetails, cityDetails])
+    );
+  }
+};
+
+const getCityDetails = (cityName) => {
+  let prevCityDetails = JSON.parse(localStorage.getItem("city-details"));
+  return prevCityDetails.find(
+    (item) => item.cityName.toLowerCase() === cityName.toLowerCase()
+  );
+};
+
 export const fetchCityStatus = (cityName) => {
   return async (dispatch) => {
-    dispatch(weatherActions.setIsLoading({ data: true }));
     dispatch(weatherActions.setCityName({ data: cityName }));
+    if (cityFetched(cityName)) {
+      let res = getCityDetails(cityName);
+      dispatch(weatherActions.setCityDetails({ data: res }));
+      return;
+    }
+    dispatch(weatherActions.setIsLoading({ data: true }));
     try {
       // get latitude and longitude
       let latLong = await axios.get(
@@ -31,27 +62,27 @@ export const fetchCityStatus = (cityName) => {
       );
 
       // filter data
-      let cityDetails = res.data.list.map((item) => {
-        return {
-          day: new Date(item.dt_txt).toLocaleDateString("en-US", {
+      let unProccessedCityDetails = res.data.list[0];
+      let cityDetails = {
+        day: new Date(unProccessedCityDetails.dt_txt).toLocaleDateString(
+          "en-US",
+          {
             weekday: "long",
-          }),
-          time: formatAMPM(item.dt_txt),
-          weatherCondtion: item.weather[0].main,
-          windSpeed: item.wind.speed,
-          temperature: parseInt(item.main.temp - 273.15),
-          feelsLike: item.main.feels_like,
-          humidity: item.main.humidity,
-          pressure: item.main.pressure,
-          minTemperature: parseInt(item.main.temp_min - 273.15),
-          maxTemperature: parseInt(item.main.temp_max - 273.15),
-        };
-      });
+          }
+        ),
+        time: formatAMPM(unProccessedCityDetails.dt_txt),
+        weatherCondtion: unProccessedCityDetails.weather[0].main,
+        windSpeed: unProccessedCityDetails.wind.speed,
+        temperature: parseInt(unProccessedCityDetails.main.temp - 273.15),
+        humidity: unProccessedCityDetails.main.humidity,
+        visibility: (unProccessedCityDetails.visibility) /1000
+      };
+      setCity({ ...cityDetails, cityName });
+      // set data in redux
       dispatch(weatherActions.setCityDetails({ data: cityDetails }));
     } catch (e) {
       console.log("error in fetching weather info..", e);
-      dispatch(weatherActions.setCityDetails({ data: [] }));
-      dispatch(weatherActions.setShowTopFive({ data: false }));
+      dispatch(weatherActions.setCityDetails({ data: null }));
     } finally {
       dispatch(weatherActions.setIsLoading({ data: false }));
     }

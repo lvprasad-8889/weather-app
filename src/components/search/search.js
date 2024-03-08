@@ -1,5 +1,7 @@
 import "./search.css";
+
 import React, { memo, useEffect, useState } from "react";
+
 import Result from "../results/results";
 import { fetchCityStatus } from "../../store/actions";
 import { useDispatch } from "react-redux";
@@ -20,7 +22,7 @@ const Search = () => {
   const searchCity = (event) => {
     event.preventDefault();
     if (cityName) {
-      dispatch(fetchCityStatus(cityName));
+      dispatch(fetchCityStatus(cityName.toLowerCase()));
       setError({
         ...error,
         submitted: false,
@@ -48,8 +50,8 @@ const Search = () => {
   return (
     <React.Fragment>
       <div className="container">
-        <div className="row mt-5">
-          <form className="search col-8 mx-auto" onSubmit={searchCity}>
+        <div className="row mt-2 d-flex">
+          <form className="search col-9 mx-auto" onSubmit={searchCity}>
             <input
               type="search"
               name="search-city"
@@ -60,15 +62,16 @@ const Search = () => {
               onChange={changeCityName}
             />
           </form>
-          <div className="btn btn-primary col-4" onClick={searchCity}>
-            Search
-          </div>
+          <input
+            type="submit"
+            className="col-3 btn btn-dark"
+            onClick={searchCity}
+            value="Search"
+          />
         </div>
-        <div className="row mb-4">
           {error.submitted && (
-            <small className="text-danger">{error.msg}</small>
+            <small className="text-danger mb-4">{error.msg}</small>
           )}
-        </div>
         {error.validName && <Result />}
       </div>
     </React.Fragment>

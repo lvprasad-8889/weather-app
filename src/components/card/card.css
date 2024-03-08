@@ -1,89 +1,53 @@
-.spacing-header {
-  padding: 20px 20px 12px !important;
+.weather-box {
+  text-align: center;
 }
 
-.spacing-body {
+.weather-box .temperature {
+  font-size: 40px;
+  font-weight: 800;
+  position: relative;
+}
+
+.weather-box .temperature sup {
+  font-size: 20px;
+  position: absolute;
+  font-weight: 600;
+  top: 16px;
+}
+
+.weather-box .description {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.weather-details i {
+  font-size: 36px;
+}
+.weather-details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.box-shadow {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.box {
   padding: 20px;
+  border-radius: 10px;
 }
 
-.display-temp {
+.humidity,
+.wind, .visibility {
   display: flex;
-  gap: 2px;
-}
-
-.display-temp > .range {
-  margin-top: -10px;
-}
-
-.units {
-  display: flex;
-  flex-direction: column;
-}
-
-.temp {
-  font-weight: bold;
-  font-size: 45px;
-  margin-top: -20px;
-}
-
-.range {
-  font-size: 30px;
-}
-
-.symbol {
-  border-radius: 50%;
-  width: 5px;
-  height: 50x;
-  padding: 2px;
-  border: solid;
-}
-
-.sub {
-  font-size: 18px;
-  color: rgba(0, 0, 0, 0.17);
-}
-.subAdjust {
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.17);
-}
-.line {
-  background-color: rgba(0, 0, 0, 0.15);
-  animation: hrAnimation 0.5s ease-in;
-}
-
-@keyframes hrAnimation {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-.spacing-body > :first-child {
+  align-items: center;
   gap: 10px;
 }
 
-.dropdown-menu {
-  height: 138px;
-  overflow-y: scroll;
-}
-.dropdown-item,
-.dropdown-toggle {
-  cursor: pointer;
-}
-
-.display {
-  display: none;
-}
-
-
-@media screen and (max-width: 576px) {
-  .display {
-    display: block;
-  }
-
-  .need-margin {
-    margin: 1rem 0 !important;
-  }
+.text span {
+  font-size: 20px;
+  font-weight: 700;
 }

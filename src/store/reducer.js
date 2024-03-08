@@ -3,10 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLoading: false,
   cityName: "",
-  cityDetails: [],
   currentItem: {},
-  showTopFive: false,
-  topFive: [],
 };
 
 const weatherSlice = createSlice({
@@ -17,22 +14,11 @@ const weatherSlice = createSlice({
       state.isLoading = action.payload.data;
     },
     setCityDetails(state, action) {
-      state.cityDetails = action.payload.data;
-      state.currentItem = state.cityDetails[0];
-      state.cityDetails = state.cityDetails.slice(0, 5);
+      state.currentItem = action.payload.data;
     },
     setCityName(state, action) {
       state.cityName = action.payload.data;
-    },
-    setCurrentItem(state, action) {
-      state.currentItem = state.cityDetails[action.payload.data];
-    },
-    setShowTopFive(state, action) {
-      state.showTopFive = action.payload.data;
-    },
-    toggleTopFive(state, action) {
-      state.showTopFive = !state.showTopFive;
-    },
+    }
   },
 });
 

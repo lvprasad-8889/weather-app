@@ -2,95 +2,58 @@ import React, { memo } from "react";
 
 import "./card.css";
 
-import Rain from "../../Images/rain.svg";
-import Cloud from "../../Images/cloudy.svg";
-import Sunny from "../../Images/sunny.svg";
+import Rain from "../../Images/rain.png";
+import Cloud from "../../Images/cloud.png";
+import Sunny from "../../Images/clear.png";
+import Snow from "../../Images/snow.png";
 
 const Card = ({ currentItem }) => {
   let selectImg = {
     Clouds: Cloud,
     Rain: Rain,
     Clear: Sunny,
+    Snow: Snow,
   };
   return (
     <React.Fragment>
       {currentItem && (
-        <div className="card">
-          <div className="spacing-header text-uppercase d-flex justify-content-between fw-bold">
-            <div>{currentItem.day}</div>
-            <div>{currentItem.time}</div>
+        <div className="">
+          <div className="weather-condition-image d-flex justify-content-center">
+            <img
+              src={selectImg[currentItem.weatherCondtion]}
+              alt="Loading.."
+              width="100px"
+              height="100px"
+            />
           </div>
-          <hr />
-          <div className="row spacing-body">
-            <div className="col-sm-4">
-              <div className="d-flex justify-content-center align-items-center gap-2">
-                <img
-                  src={selectImg[currentItem.weatherCondtion]}
-                  alt="Loading..."
-                  width="60px"
-                  height="60px"
-                />
-                <div className="display-temp">
-                  <div className="temp">{currentItem.temperature}</div>
-                  <div className="units">
-                    <div className="symbol"></div>
-                    <span className="sub">C</span>
-                  </div>
-                </div>
-              </div>
-              <div className="weather-condition fw-bold text-center text-primary m-2">
-                {currentItem.weatherCondtion}
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="title">Min</div>
-                <div className="value">
-                  <div className="display-temp">
-                    <div className="range">{currentItem.minTemperature}</div>
-                    <div className="units gap-0">
-                      <div className="symbol adjust"></div>
-                      <span className="subAdjust">C</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr className="line need-margin" />
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="title">Max</div>
-                <div className="value">
-                  <div className="display-temp">
-                    <div className="range">{currentItem.maxTemperature}</div>
-                    <div className="units">
-                      <div className="symbol"></div>
-                      <span className="subAdjust">C</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr className="line display" />
+          <div className="weather-box m-2">
+            <div className="temperature">
+              {currentItem.temperature} <sup>°C</sup>
             </div>
-            <div className="col-sm-8">
-              <div className="d-flex justify-content-between">
-                <div className="title">Feels Like</div>
-                <div className="value fw-bold">{currentItem.feelsLike}</div>
+            <p className="description">{currentItem.weatherCondtion}</p>
+          </div>
+          <div className="weather-details d-flex justify-content-sm-around justify-content-center gap-3 flex-wrap">
+            <div className="humidity box-shadow box">
+              <i className="fa-sharp fa-solid fa-droplet"></i>
+              <div className="text">
+                <span id="humidity">{currentItem.humidity}%</span>
+                <div>Humidity</div>
               </div>
-              <hr className="line" />
-              <div className="d-flex justify-content-between">
-                <div className="title">Humidity</div>
-                <div className="value fw-bold">{currentItem.humidity}</div>
+            </div>
+
+            <div className="wind box-shadow box">
+              <i className="fa-solid fa-wind"></i>
+              <div className="text">
+                <span id="wind-speed">{currentItem.windSpeed} Km/H</span>
+                <div>Wind Speed</div>
               </div>
-              <hr className="line" />
-              <div className="d-flex justify-content-between">
-                <div className="title">Wind Speed</div>
-                <div className="value fw-bold">
-                  {currentItem.windSpeed} {"km/h"}
-                </div>
-              </div>
-              <hr className="line" />
-              <div className="d-flex justify-content-between">
-                <div className="title">Pressure</div>
-                <div className="value fw-bold">
-                  {currentItem.pressure} Pascals
-                </div>
+            </div>
+
+            <div className="visibility box-shadow box">
+              <i className="fa-solid fa-eye"></i>
+              <div className="text">
+                <span id="wind-speed">{currentItem.visibility} Km</span>
+                <div>Visibility</div>
               </div>
             </div>
           </div>
